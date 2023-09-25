@@ -14,7 +14,7 @@ Your next ramp-up task is going to be an exciting one! Get ready for a Kubernete
 
 Create K8s resources by starting up minikube and running the following commands:
 
-```
+```sh
 cd scavenger
 ./scavenger-setup.sh
 ```
@@ -25,7 +25,7 @@ Add add your answers to `scavenger.json`
 
 We have [GitHub Actions](https://github.com/features/actions) configured to report your score to our scavenger hunt. Just create your own branch prefixed with `scavenger-` and push to it. [Then you can see your results here](https://github.com/abanuelo/intro-to-kube/actions/workflows/scavenger.yml).
 
-```
+```sh
 # create your branch
 git checkout -b scavenger-<github-username>
 # add your local changes
