@@ -12,7 +12,7 @@
     "7": "Error from server (BadRequest): container \"nginx\" in pod \"nginx\" is waiting to start: trying and failing to pull image" 
   },
   "mark-iii": { 
-    "8": "- name: POSTGRES_PASSWORD\n value: supersecret",
-     "9": "image: nginx" 
+    "8": "env:\n - name: POSTGRES_PASSWORD\n value: supersecret",
+     "9": "nginx" 
   }
 }
