@@ -13,10 +13,8 @@ kubectl create -f ./k8s/nginx-deployment.yml
 kubectl config set-context --current --namespace=prod
 kubectl create -f ./k8s/nginx-deployment.yml
 kubectl config set-context --current --namespace=database
-kubectl create sa default -n database
 kubectl create -f ./k8s/postgres-pod.yml
 kubectl config set-context --current --namespace=backup
-kubectl create sa default -n backup
 kubectl create -f ./k8s/postgres-pod.yml
 
 # go back to default namespace
