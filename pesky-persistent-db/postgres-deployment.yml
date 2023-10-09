@@ -1,9 +1,3 @@
-# TODO:
-# a. Add a config map reference to your secrets
-# b. Add the following volumeMounts:
-#        mountPath: /var/lib/postgresql/data
-#        name to be postgredb
-# c. Add the persistent volume claim from postgres-persistent.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -24,13 +18,34 @@ spec:
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: postgres-config
+          # Reference secrets from postgres-secret.yml
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB  
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name:  POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
           volumeMounts:
             - name: postgresdb
               mountPath: /var/lib/postgresql/data
+              # Mount the secrets as a volume
+            - name: postgres-secret-volume
+              mountPath: /etc/secrets
+              readOnly: true
       volumes:
         - name: postgresdb
           persistentVolumeClaim:
             claimName: postgres-pv-claim
+        - name: postgres-secret-volume
+          secret:
+            secretName: postgres-secret
