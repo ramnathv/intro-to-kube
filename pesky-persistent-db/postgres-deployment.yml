@@ -18,13 +18,11 @@ spec:
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
           # Reference secrets from postgres-secret.yml
           env:
-            - name: POSTGRES_DB
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_DB  
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:

@@ -111,7 +111,7 @@ jobs:
           if [ "$DEPLOYMENT_CONFIGMAP" == "postgres-config" ]; then
             echo "✅ Deployment ConfigMap setup is correct"
           else
-            IN_SECRET_INSTEAD=`kubectl describe deployment postgres | grep 'Environment:' -A 3 | grep 'POSTGRES_PASSWORD' | grep 'postgres-secret' -o`
+            IN_SECRET_INSTEAD=`kubectl describe deployment postgres | grep 'Environment:' -A 2 | grep 'POSTGRES_PASSWORD' | grep 'postgres-secret' -o`
             if [ "$IN_SECRET_INSTEAD" == "postgres-secret" ]; then
               echo "✅ [CHALLENGE] - Deployment Secret Setup is correct"
             else
