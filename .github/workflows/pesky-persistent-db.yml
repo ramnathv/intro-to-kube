@@ -48,8 +48,8 @@ jobs:
       # PERSISTENT VOLUME CHECKS
       - name: Check if correct Persistent Volume accessMode applied
         run: |
-          PV_ACCESS_MODE_PV=`kubectl describe pv postgres | grep "Access Modes" | grep RWX -o`
-          if [ "$PV_ACCESS_MODE_PV" == "RWX" ]; then
+          PV_ACCESS_MODE=`kubectl describe pv postgres | grep "Access Modes" | grep RWX -o`
+          if [ "$PV_ACCESS_MODE" == "RWX" ]; then
             echo "✅ Access Mode for Persistent Volume is correct"
           else
             echo "❌ Access Mode for Persistent Volume is incorrect"
@@ -81,9 +81,8 @@ jobs:
       # PERSISTENT VOLUME CLAIM CHECKS
       - name: Check if correct Persistent Volume Claim accessModes applied
         run: |
-          PVC_ACCESS_MODE_PVC=`kubectl describe pvc postgres | grep "Access Modes" | grep "RWX" -o`
-          echo $PVC_ACCESS_MODE_PVC
-          if [ "$PVC_ACCESS_MODE_PVC" == "RWX" ]; then
+          PVC_ACCESS_MODE=`kubectl describe pvc postgres | grep "Access Modes" | grep "RWX" -o`
+          if [ "$PVC_ACCESS_MODE" == "RWX" ]; then
             echo "✅ Access Mode for Persistent Volume Claim is correct"
           else
             echo "❌ Access Mode for Persistent Volume Claim is incorrect"
