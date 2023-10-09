@@ -1,5 +1,5 @@
 # location for cert keys
-mkdir user_certs && cd user_certs
+mkdir -p user_certs && cd user_certs
 
 # create Jesus certs
 openssl genrsa -out Jesus.key 2048
