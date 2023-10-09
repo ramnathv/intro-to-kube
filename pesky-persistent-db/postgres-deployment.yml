@@ -1,3 +1,9 @@
+# TODO:
+# a. Add a config map reference to your secrets
+# b. Add the following volumeMounts:
+#        mountPath: /var/lib/postgresql/data
+#        name to be postgredb
+# c. Add the persistent volume claim from postgres-persistent.yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,10 +23,14 @@ spec:
           image: postgres:10.1
           imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 5432 # Exposes container port
-          # TODO:
-          # a. Add a config map reference to your secrets
-          # b. Add the following volumeMounts:
-          #        mountPath: /var/lib/postgresql/data
-          #        name to be postgredb
-          # c. Add the persistent volume claim from postgres-persistent.yml
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - name: postgresdb
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
