@@ -17,7 +17,6 @@ spec:
     - namespaceSelector:
         matchLabels:
           name: namespace-b
-  - to:
     - namespaceSelector:
         matchLabels:
           name: namespace-c
