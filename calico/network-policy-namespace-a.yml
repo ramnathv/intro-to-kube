@@ -4,19 +4,20 @@ metadata:
   name: network-policy-for-namespace-a
   namespace: namespace-a
 spec:
+  podSelector:
+    matchLabels:
+      name: nginx
   ingress:
   - from:
     - namespaceSelector:
         matchLabels:
           name: namespace-b
-    ports:
-      - protocol: TCP
-        port: 80
   egress:
   - to:
     - namespaceSelector:
         matchLabels:
+          name: namespace-b
+  - to:
+    - namespaceSelector:
+        matchLabels:
           name: namespace-c
-    ports:
-      - protocol: TCP
-        port: 5432

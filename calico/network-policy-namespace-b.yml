@@ -4,6 +4,9 @@ metadata:
   name: network-policy-for-namespace-b
   namespace: namespace-b
 spec:
+  podSelector:
+    matchLabels:
+      name: nginx
   ingress:
   - from:
     - namespaceSelector:

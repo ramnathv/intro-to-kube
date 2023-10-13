@@ -6,9 +6,9 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: pod-namespace-c
+      name: postgres
   ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: namespace-a
+    - from: 
+      - namespaceSelector:
+          matchLabels:
+            name: namespace-a
