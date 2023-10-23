@@ -4,17 +4,35 @@ metadata:
   name: build-push-deploy
 spec:
   tasks:
-    # TODO:
-    # Add reference to the build, push, and deploy tasks
-    # 1. For the build task add these env variables
-    #   - REPO URL = https://github.com/expressjs/express.git
-    # 2. For the push task add these env variables
-    #   - IMAGE_NAME = nginx:latest
-    #   - DOCKERFILE_PATH = /workspace/source
-    #   - CONTEXT_PATH = /workspace/source
-    #   - CONTAINER_REGISTRY = registry.example.com
-    #   - REGISTRY_USERNAME = Bob
-    #   - REGISTRY_PASSWORD = password1234
-    # 3. For the deploy task add these env variables:
-    #   - NAMESPACE = default
-    #   - IMAGE: nginx:latest
+  - name: build
+    taskRef:
+      name: build
+    params: 
+      - name: REPO_URL
+        value: https://github.com/expressjs/express.git
+  - name: push
+    taskRef:
+      name: push
+    params:
+    - name: IMAGE_NAME
+      value: nginx:latest
+    - name: DOCKERFILE_PATH
+      value: /workspace/source
+    - name: CONTEXT_PATH
+      value: /workspace/source
+    - name: CONTAINER_REGISTRY    
+      value: registry.example.com
+    - name: REGISTRY_USERNAME
+      value: Bob
+    - name: REGISTRY_PASSWORD 
+      value: password1234
+  - name: deploy
+    taskRef:
+      name: deploy
+    params:
+    - name: NAMESPACE
+      value: default
+    - name: IMAGE 
+      value: nginx:latest
+    - name: REPO_URL
+      value: https://github.com/abanuelo/intro-to-kube.git
